@@ -33,7 +33,7 @@ for password in passwords_list:
         else:
             s=s+1
     print("analyzing password  : " , password)
-    sleep(2)
+    sleep(1)
     details = {"letters" : l , "digits" : d  , "symbols" : s }
     print(details)
 
