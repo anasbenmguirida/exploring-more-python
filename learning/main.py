@@ -35,7 +35,7 @@ else:
 immutable_string[len(immutable_string)]=" 2" #string object CANT be changed ama l variable peut pointer sur un autre string object
 print("my immutable test on strings  : " , immutable_string)"""
 
-my_string = "hello world" 
+""" my_string = "hello world" 
 print("string in py are similar to arrays => sequence! ")
 print("char at index 2  : "  , my_string[2])
 
@@ -45,4 +45,26 @@ print("apres l'index 3 : " , my_string[3:])
 
 upper_string = my_string.upper() 
 print(upper_string)
+"""
 
+"""myTuple = ("hello" , 1 , "mohamed")  # tuple est immutable , faut passer par les listes 
+
+myTupleList = list(myTuple)
+myTupleList[2] = 3 
+
+myTuple = tuple(myTupleList)
+for item in myTuple : 
+    print(item) """
+
+import random
+def guess_the_number():
+    x= input("guess a number from 1 to 6 ")
+    x=int(x)
+    y = random.randrange(1 , 6)
+    if x == y : 
+        print("you win the game ! ")
+    else:
+        print("you lost try again :/")
+        guess_the_number()
+
+guess_the_number()
