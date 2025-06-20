@@ -3,28 +3,42 @@
 
 
 from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import PolynomialFeatures
 import pandas as pd
 import numpy as np
+from sklearn.metrics import r2_score
 
 # njibo data mn le fichier excel 
 salary_data = pd.read_excel("ML/Regression/poly-salary.xlsx")
 X = salary_data[["Years of Experience"]] 
 Y = salary_data["salary"]
 
-polynomial_model = PolynomialFeatures(degree=4)
+#diviser les données qu'on a en 80% training et 20% test 
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
-X_poly = polynomial_model.fit_transform(X)
+polynomial_model = PolynomialFeatures(degree=2) #degree de polynome 
 
-model = LinearRegression()
-model.fit(X_poly, Y)
+X_poly_train = polynomial_model.fit_transform(X_train)
+X_poly_test = polynomial_model.transform(X_test)
 
-experience = np.array([[8]]) # creer un tableau 2d 
-experience_poly = polynomial_model.transform(experience) # transormer sous forme matricielle 
-print(experience_poly)
-predicted_salary = model.predict(experience_poly) # l'utiliser dans le model linear pour predicter 
-print(Y)
-print(f"8 years of experience: {predicted_salary[0]:.2f}")
+#traoner le modele 
+my_model = LinearRegression() 
+my_model.fit(X_poly_train , y_train)
+
+train_preds = my_model.predict(X_poly_train)
+test_preds = my_model.predict(X_poly_test)
+
+# evaluation , calcule de r2 score 
+train_score = r2_score(y_train, train_preds)
+test_score = r2_score(y_test, test_preds)
+
+print(f"Train R² Score: {train_score:.3f}")
+print(f"Test R² Score: {test_score:.3f}")
+
+
+
+
 
 
 
