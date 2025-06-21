@@ -1,7 +1,6 @@
 # Modeling Electricity Consumption in Relation to Temperature 
 # => estimer que la consomation s'eleve dans les temperature extermemnt hot/cold et modérée en temperature normaux 
 
-
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import PolynomialFeatures
@@ -29,7 +28,7 @@ my_model.fit(X_poly_train , y_train)
 train_preds = my_model.predict(X_poly_train)
 test_preds = my_model.predict(X_poly_test)
 
-# evaluation , calcule de r2 score 
+# evaluation , calcule de r2 score => coefficient de determination 
 train_score = r2_score(y_train, train_preds)
 test_score = r2_score(y_test, test_preds)
 
